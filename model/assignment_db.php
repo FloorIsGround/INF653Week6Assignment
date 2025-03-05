@@ -40,5 +40,16 @@ function delete_assignment($assignment_id){
     $statement->closeCursor();
 }
 
-#update function needed still
-#can be found from earlier assignment
+#update function for assignment
+function update_assignment($assignment_id, $description, $course_id){
+    global $db; 
+    $query = 'UPDATE assignments 
+              SET Description = :Description, courseID = :courseID 
+              WHERE ID = :assignment_id';
+    $statement = $db->prepare($query);
+    $statement->bindValue(':Description', $description);
+    $statement->bindValue(':courseID', $course_id);
+    $statement->bindValue(':assignment_id', $assignment_id);
+    $statement->execute();
+    $statement->closeCursor();
+}
