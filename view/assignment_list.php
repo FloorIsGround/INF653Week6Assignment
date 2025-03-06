@@ -17,6 +17,10 @@
             <div>
                 <p><strong><?= htmlspecialchars($assignment['courseName']) ?></strong></p>
                 <p><?= htmlspecialchars($assignment['Description']) ?></p>
+
+                <!-- Update link that sends the assignment id to update_assignment.php -->
+                <p><a href="update_assignment.php?assignment_id=<?= $assignment['ID'] ?>">Update</a></p>
+
                 <form action="." method="post">
                     <input type="hidden" name ="action" value="delete_assignment">
                     <input type="hidden" name ="assignment_id" value="<?= $assignment['ID'] ?>">

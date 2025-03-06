@@ -62,6 +62,17 @@ switch ($action){
             exit();
         }
         break;
+    case 'update_assignment':
+        if ($assignment_id && $description && $course_id) {
+            update_assignment($assignment_id, $description, $course_id);
+            header("Location: .?action=list_assignments&course_id=" . $course_id);
+            exit();
+        } else {
+            $error = "Invalid assignment data. Please check all fields.";
+            include('view/error.php');
+            exit();
+        }
+        break;
     default:
         $courses = get_courses();
         $assignments = get_assignments_by_course($course_id);

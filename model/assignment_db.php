@@ -21,6 +21,17 @@ function get_assignments_by_course($course_id){
     return $assignments;
 }
 
+function get_assignment($assignment_id) {
+    global $db;
+    $query = 'SELECT * FROM assignments WHERE ID = :assignment_id';
+    $statement = $db->prepare($query);
+    $statement->bindValue(':assignment_id', $assignment_id);
+    $statement->execute();
+    $assignment = $statement->fetch();
+    $statement->closeCursor();
+    return $assignment;
+}
+
 function add_assignment($course_id, $description){
     global $db;
     $query = 'INSERT INTO assignments (courseID, Description) VALUES (:courseID, :Description)';
@@ -43,9 +54,7 @@ function delete_assignment($assignment_id){
 #update function for assignment
 function update_assignment($assignment_id, $description, $course_id){
     global $db; 
-    $query = 'UPDATE assignments 
-              SET Description = :Description, courseID = :courseID 
-              WHERE ID = :assignment_id';
+    $query = 'UPDATE assignments SET Description = :Description, courseID = :courseID WHERE ID = :assignment_id';
     $statement = $db->prepare($query);
     $statement->bindValue(':Description', $description);
     $statement->bindValue(':courseID', $course_id);
