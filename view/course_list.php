@@ -13,6 +13,8 @@
                     </p>
                 </div>
                 <div>
+                    <!-- Update link that sends the course id to update_course.php -->
+                    <a href="update_course.php?course_id=<?= $course['courseID'] ?>">Update</a>
                     <form action="." method="post">
                         <input type="hidden" name="action" value="delete_course">
                         <input type="hidden" name="course_id" value="<?= $course['courseID']?>">
