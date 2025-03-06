@@ -45,7 +45,7 @@ switch ($action){
                 header("Location: .?action=list_courses");
                 exit();
             }catch(PDOException $e) {
-                $error = "You cannot delete a course if assignments  exist in the course.";
+                $error = "You cannot delete a course if assignments exist in the course.";
                 include("view/error.php");
                 exit();
             }
@@ -70,6 +70,17 @@ switch ($action){
         } else {
             $error = "Invalid assignment data. Please check all fields.";
             include('view/error.php');
+            exit();
+        }
+        break;
+    case 'update_course':
+        if ($course_id && $course_name) {
+            update_course($course_id, $course_name);
+            header("Location: .?action=list_courses");
+            exit();
+        } else {
+            $error = "Invalid course data. Please check all fields.";
+            include("view/error.php");
             exit();
         }
         break;
